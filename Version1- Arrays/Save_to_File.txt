@@ -1,0 +1,3 @@
+Fuel Queue 1: [empty, empty, empty, empty, empty, empty]
+Fuel Queue 2: [empty, empty, empty, empty, empty, empty]
+Fuel Queue 3: [empty, empty, empty, empty, empty, empty]

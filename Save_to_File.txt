@@ -1,0 +1,34 @@
+Fuel Queue 1-> Passenger Details for the 6 slots: 
+[empty, empty, empty, empty, empty, empty]
+[null, null, null, null, null, null]
+[null, null, null, null, null, null]
+[0, 0, 0, 0, 0, 0]
+Income: 0.0 
+
+Fuel Queue 2-> Passenger Details for the 6 slots: 
+[empty, empty, empty, empty, empty, empty]
+[null, null, null, null, null, null]
+[null, null, null, null, null, null]
+[0, 0, 0, 0, 0, 0]
+Income: 0.0 
+
+Fuel Queue 3-> Passenger Details for the 6 slots: 
+[empty, empty, empty, empty, empty, empty]
+[null, null, null, null, null, null]
+[null, null, null, null, null, null]
+[0, 0, 0, 0, 0, 0]
+Income: 0.0 
+
+Fuel Queue 4-> Passenger Details for the 6 slots: 
+[empty, empty, empty, empty, empty, empty]
+[null, null, null, null, null, null]
+[null, null, null, null, null, null]
+[0, 0, 0, 0, 0, 0]
+Income: 0.0 
+
+Fuel Queue 5-> Passenger Details for the 6 slots: 
+[empty, empty, empty, empty, empty, empty]
+[null, null, null, null, null, null]
+[null, null, null, null, null, null]
+[0, 0, 0, 0, 0, 0]
+Income: 0.0 
