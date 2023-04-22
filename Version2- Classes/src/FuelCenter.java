@@ -8,24 +8,31 @@ import java.util.Scanner;
 public class FuelCenter {
 
     //arrays/fuel queues of type Passenger
-    static Passenger[] queue1= new Passenger[6];
-    static Passenger[] queue2= new Passenger[6];
-    static Passenger[] queue3= new Passenger[6];
-    static Passenger[] queue4= new Passenger[6];
-    static Passenger[] queue5= new Passenger[6];
+    private static Passenger[] queue1= new Passenger[6];
+    private static Passenger[] queue2= new Passenger[6];
+    private static Passenger[] queue3= new Passenger[6];
+    private static Passenger[] queue4= new Passenger[6];
+    private static Passenger[] queue5= new Passenger[6];
 
     //fuel stock
-    static int fuelStock= 6600;
+    private static int fuelStock= 6600;
 
     //liters required by a customer
-    static int fuelForCustomer=0;
+    private static int fuelForCustomer=0;
 
     //income of each fuel queue
-    static double queue1_Income;
-    static double queue2_Income;
-    static double queue3_Income;
-    static double queue4_Income;
-    static double queue5_Income;
+    private static double queue1_Income;
+    private static double queue2_Income;
+    private static double queue3_Income;
+    private static double queue4_Income;
+    private static double queue5_Income;
+
+    //circular queue implementation for waiting list if all fuel queues are full
+    private static int maxSize=5; //size of queue
+    private static Passenger [] circularQueue = new Passenger[maxSize];
+    private static int front= 0; //front pointer
+    private static int rear= -1; //back pointer
+    private static int items= 0; //no. of items of the queue
 
     public static void main(String[]args){
         //console menu
@@ -51,7 +58,7 @@ public class FuelCenter {
                     107 or LPD: Load Program Data from file.
                     108 or STK: View Remaining Fuel Stock.
                     109 or AFS: Add Fuel Stock.
-                    110 or IFQ: View Income of Each Fuel Queue. 
+                    110 or IFQ: View Income of Each Fuel Queue.
                     999 or EXT: Exit the Program.""");
             Scanner obj= new Scanner(System.in);
             option= obj.nextLine();
@@ -266,6 +273,29 @@ public class FuelCenter {
         }
 
         System.out.println("Added Successfully!");
+
+        //waiting list implementation for adding passengers
+
+        //checking if all fuel queues are full
+        //5 denotes the last index of each queue
+        if (values2[0]==5 && values2[1]==5 && values2[2]==5 &&
+                values2[3]==5 && values2[4]==5){
+
+            //check if waiting list is full
+                if(items==maxSize){
+                    System.out.println("Waiting list queue is full right now. ");
+                }
+                else{
+                    if(rear == maxSize-1){
+                        rear=-1;
+
+                        circularQueue[++rear]= new Passenger(firstName, lastName, vehicleNum, litersRequired);
+                        items++;
+                        System.out.println("Passenger has been added to the waiting queue.");
+                        System.out.println(Arrays.toString(circularQueue));
+                    }
+                }
+        }
     }
     public static void removeCustomer(){
         System.out.println("From which queue do you wish to remove? (1,2,3,4 or 5)");
@@ -327,6 +357,18 @@ public class FuelCenter {
             queue1[0].setVehicleNum(null);
             queue1[0].setLitersRequired(0);
             System.out.println("Removed Successfully!");
+
+            //sending passenger to queue1 from waiting list
+            if(items==0){
+                System.out.println("Waiting list is empty so not adding anyone automatically. ");
+            }
+            else{
+                queue1[5]= circularQueue[front++];
+                if (front==maxSize){
+                    front=0;
+                    items--;
+                }
+            }
         }
         if(queue==2){
 
@@ -338,6 +380,18 @@ public class FuelCenter {
             queue2[0].setVehicleNum(null);
             queue2[0].setLitersRequired(0);
             System.out.println("Removed Successfully!");
+
+            //sending passenger to queue1 from waiting list
+            if(items==0){
+                System.out.println("Waiting list is empty so not adding anyone automatically. ");
+            }
+            else{
+                queue2[5]= circularQueue[front++];
+                if (front==maxSize){
+                    front=0;
+                    items--;
+                }
+            }
         }
         if(queue==3){
 
@@ -349,6 +403,18 @@ public class FuelCenter {
             queue3[0].setVehicleNum(null);
             queue3[0].setLitersRequired(0);
             System.out.println("Removed Successfully!");
+
+            //sending passenger to queue1 from waiting list
+            if(items==0){
+                System.out.println("Waiting list is empty so not adding anyone automatically. ");
+            }
+            else{
+                queue3[5]= circularQueue[front++];
+                if (front==maxSize){
+                    front=0;
+                    items--;
+                }
+            }
         }
         if(queue==4){
 
@@ -360,6 +426,18 @@ public class FuelCenter {
             queue4[0].setVehicleNum(null);
             queue4[0].setLitersRequired(0);
             System.out.println("Removed Successfully!");
+
+            //sending passenger to queue1 from waiting list
+            if(items==0){
+                System.out.println("Waiting list is empty so not adding anyone automatically. ");
+            }
+            else{
+                queue4[5]= circularQueue[front++];
+                if (front==maxSize){
+                    front=0;
+                    items--;
+                }
+            }
         }
         if(queue==5){
 
@@ -371,6 +449,18 @@ public class FuelCenter {
             queue5[0].setVehicleNum(null);
             queue5[0].setLitersRequired(0);
             System.out.println("Removed Successfully!");
+
+            //sending passenger to queue1 from waiting list
+            if(items==0){
+                System.out.println("Waiting list is empty so not adding anyone automatically. ");
+            }
+            else{
+                queue5[5]= circularQueue[front++];
+                if (front==maxSize){
+                    front=0;
+                    items--;
+                }
+            }
         }
     }
     public static void calcQueueIncome(){
@@ -541,7 +631,7 @@ public class FuelCenter {
         System.out.println("Fuel Available= "+fuelStock);
     }
     public static void addFuel(){
-        System.out.println("How many liters of fuel are you adding? ");
+        System.out.println("How many liters of fuel  are you adding? ");
         Scanner obj= new Scanner(System.in);
         int liters= obj.nextInt();
         fuelStock+=liters;
